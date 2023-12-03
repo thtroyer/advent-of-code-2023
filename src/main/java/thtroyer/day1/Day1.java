@@ -23,7 +23,7 @@ public class Day1 {
     /**
      * Takes in all lines, returns summed answer
      */
-    int getCalibrationValue(String... lines) {
+    public int getCalibrationValue(String... lines) {
         return Arrays.stream(lines)
                 .map(this::getCalibrationValue)
                 .map(Integer::parseInt)
