@@ -1,6 +1,8 @@
 package thtroyer.day1;
 
 import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Day1 {
     record Match(int index, String name, int value) {}
@@ -24,32 +26,22 @@ public class Day1 {
     }
 
     protected int getCalibrationValue(String line) {
-        line = replaceFirst(line);
-        line = replaceLast(line);
+        System.out.print(line + " is ");
 
-        var numbers = line.chars()
-                .mapToObj(i -> (char)i)
-                .filter(Character::isDigit)
-                .map(String::valueOf)
-                .toList();
+        var matches = Stream.concat(
+                findAllNumberStrings(line).stream(),
+                findAllNumerics(line).stream()
+        ).sorted(Comparator.comparingInt(Match::index)).toList();
 
-        return Integer.parseInt(numbers.getFirst() + numbers.getLast());
+        return matches.getFirst().value() * 10
+                + matches.getLast().value();
     }
+
 
     private String replaceFirst(String line) {
         var match = findFirstNumberString(line);
         return match
                 .map(value -> line.replaceFirst(value.name(), String.valueOf(value.value)))
-                .orElse(line);
-    }
-
-    private String replaceLast(String line) {
-        var match = findLastNumberString(line);
-        return match
-                .map(value -> reverse(
-                        reverse(line).replaceFirst(
-                                reverse(value.name()),
-                                String.valueOf(value.value))))
                 .orElse(line);
     }
 
@@ -64,12 +56,53 @@ public class Day1 {
                 .min(Comparator.comparingInt(Match::index));
     }
 
-    private Optional<Match> findLastNumberString(String line) {
-        return numbers.entrySet().stream()
-                .map(m -> new Match(line.indexOf(m.getKey()), m.getKey(), m.getValue()))
-                .filter(m -> m.index() != -1)
-                .max(Comparator.comparingInt(Match::value));
+    private List<Match> findAllNumberStrings(String line) {
+        return IntStream.range(0, line.length())
+                .boxed()
+                .map(i -> findAMatchAtIndex(line, i))
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .sorted(Comparator.comparingInt(Match::index))
+                .toList();
     }
+
+    private List<Match> findAllNumerics(String line) {
+        return IntStream.range(0, line.length())
+                .boxed()
+                .filter(i -> Character.isDigit(line.charAt(i)))
+                .map(i -> new Match(i, null, Integer.parseInt(line.substring(i, i+1))))
+                .toList();
+    }
+
+    private Optional<Match> findAMatchAtIndex(String line, int index) {
+        return numbers.entrySet().stream()
+                .filter(n -> line.indexOf(n.getKey(), index) == index)
+                .map(n -> new Match(index, n.getKey(), n.getValue()))
+                .findAny();
+    }
+
+//    private Optional<Match> findLastNumberString(String line) {
+//        var matches = numbers.entrySet().stream()
+//                .map(m ->
+//                        !line.contains(m.getKey()) ?
+//                                Optional.empty() :
+//                                Optional.of(new Match(
+//                                        line.length() - reverse(line).indexOf(reverse(m.getKey())) - m.getKey().length(),
+//                                        m.getKey(),
+//                                        m.getValue()))
+//                ).filter(Optional::isPresent)
+//                .map(Optional::get)
+//                .max((Match m) -> Comparator.comparingInt(m.index))
+//        return matches;
+//
+////        return numbers.entrySet().stream()
+////                .map(m -> new Match(
+////                        line.length() - reverse(line).indexOf(reverse(m.getKey())) - m.getKey().length(),
+////                        m.getKey(),
+////                        m.getValue()))
+////                .filter(m -> m.index() != -1)
+////                .max(Comparator.comparingInt(Match::index));
+//    }
 
 
     public static void main(String[] args) {

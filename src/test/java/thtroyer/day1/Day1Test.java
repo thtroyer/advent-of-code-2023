@@ -32,6 +32,7 @@ class Day1Test {
 
     private static Stream<Arguments> getCalibrationValue_single_line() {
         return Stream.of(
+                // part 1
                 Arguments.of("1abc2", 12),
                 Arguments.of("pqr3stu8vwx", 38),
                 Arguments.of("a1b2c3d4e5f", 15),
@@ -43,7 +44,10 @@ class Day1Test {
                 Arguments.of("xtwone3four", 24),
                 Arguments.of("4nineeightseven2", 42),
                 Arguments.of("zoneight234", 14),
-                Arguments.of("7pqrstsixteen", 76)
+                Arguments.of("7pqrstsixteen", 76),
+                // additional issues
+                Arguments.of("bbm4twoeight8oneone3one", 41),
+                Arguments.of("sevensixjczjhjzbj8fnsnrsevenfive2seven", 77)
         );
     }
 
