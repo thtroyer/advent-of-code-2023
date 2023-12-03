@@ -12,7 +12,7 @@ class Day1Test {
 
     @ParameterizedTest
     @MethodSource
-    void getCalibrationValue_single_line(String input, int expected) {
+    void getCalibrationValue_single_line(String input, String expected) {
         Day1 day1 = new Day1();
 
         assertThat(
@@ -33,21 +33,21 @@ class Day1Test {
     private static Stream<Arguments> getCalibrationValue_single_line() {
         return Stream.of(
                 // part 1
-                Arguments.of("1abc2", 12),
-                Arguments.of("pqr3stu8vwx", 38),
-                Arguments.of("a1b2c3d4e5f", 15),
-                Arguments.of("treb7uchet", 77),
+                Arguments.of("1abc2", "12"),
+                Arguments.of("pqr3stu8vwx", "38"),
+                Arguments.of("a1b2c3d4e5f", "15"),
+                Arguments.of("treb7uchet", "77"),
                 // part 2
-                Arguments.of("two1nine", 29),
-                Arguments.of("eightwothree", 83),
-                Arguments.of("abcone2threexyz", 13),
-                Arguments.of("xtwone3four", 24),
-                Arguments.of("4nineeightseven2", 42),
-                Arguments.of("zoneight234", 14),
-                Arguments.of("7pqrstsixteen", 76),
+                Arguments.of("two1nine", "29"),
+                Arguments.of("eightwothree", "83"),
+                Arguments.of("abcone2threexyz", "13"),
+                Arguments.of("xtwone3four", "24"),
+                Arguments.of("4nineeightseven2", "42"),
+                Arguments.of("zoneight234", "14"),
+                Arguments.of("7pqrstsixteen", "76"),
                 // additional issues
-                Arguments.of("bbm4twoeight8oneone3one", 41),
-                Arguments.of("sevensixjczjhjzbj8fnsnrsevenfive2seven", 77)
+                Arguments.of("bbm4twoeight8oneone3one", "41"),
+                Arguments.of("sevensixjczjhjzbj8fnsnrsevenfive2seven", "77")
         );
     }
 
