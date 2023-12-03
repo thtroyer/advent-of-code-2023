@@ -8,3 +8,9 @@ Not sure how much time I'll be able to spend on this as December is always busy,
 Going to use the latest Java (that I haven't had time to program with) and possibly try out some Kotlin.
 
 <!--- advent_readme_stars table --->
+## 2023 Results
+
+| Day | Part 1 | Part 2 |
+| :---: | :---: | :---: |
+| [Day 1](https://adventofcode.com/2023/day/1) | ⭐ | ⭐ |
+<!--- advent_readme_stars table --->
