@@ -2,6 +2,7 @@ package thtroyer.day2;
 
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Day2Test {
@@ -15,7 +16,9 @@ class Day2Test {
                 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green""";
 
        Day2 day2 = new Day2();
-       day2.play(input.split("\n"), 1, 1, 1);
+       int result = day2.play(input.split("\n"), 12, 14, 13);
+
+       assertThat(result).isEqualTo(8);
 
     }
 
