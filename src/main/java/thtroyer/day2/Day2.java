@@ -5,19 +5,19 @@ import java.util.List;
 
 public class Day2 {
     public int play(String[] gameStrings, int red, int blue, int green) {
-        var redCount = new CubeCount(BlockType.RED, red);
-        var blueCount = new CubeCount(BlockType.BLUE, blue);
-        var greenCount = new CubeCount(BlockType.GREEN, green);
-        var maxRolls = List.of(redCount, blueCount, greenCount);
+        var maxRolls = List.of(
+                new CubeCount(BlockType.RED, red),
+                new CubeCount(BlockType.BLUE, blue),
+                new CubeCount(BlockType.GREEN, green));
 
         var games = Arrays.stream(gameStrings)
                 .map(this::gameFromLine)
                 .toList();
 
         var possibleGames = games.stream()
-                .filter(g -> g.isGamePossible(redCount))
-                .filter(g -> g.isGamePossible(blueCount))
-                .filter(g -> g.isGamePossible(greenCount))
+                .filter(g -> maxRolls.stream()
+                        .map(g::isGamePossible)
+                        .reduce(true, (acc, res) -> acc && res))
                 .toList();
 
         return possibleGames.stream()

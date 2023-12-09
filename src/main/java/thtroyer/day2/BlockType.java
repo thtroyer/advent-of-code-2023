@@ -2,7 +2,6 @@ package thtroyer.day2;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Optional;
 
 public enum BlockType {
     BLUE ("blue"),
@@ -14,11 +13,9 @@ public enum BlockType {
     }
 
     public static BlockType from(String name) {
-
-        BlockType b = Arrays.stream(values())
+        return Arrays.stream(values())
                 .map(v -> v.name.equals(name) ? v : null)
                 .filter(Objects::nonNull)
                 .findAny().orElseThrow(RuntimeException::new);
-        return b;
     }
 }
