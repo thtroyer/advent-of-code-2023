@@ -12,4 +12,18 @@ public record Game (int id, List<List<CubeCount>> drawings) {
         
         return impossibleDrawings.isEmpty();
     }
+
+    public int getPower() {
+        return getPowerOf(BlockType.BLUE) * getPowerOf(BlockType.RED) * getPowerOf(BlockType.GREEN);
+    }
+
+    private int getPowerOf(BlockType type) {
+        return drawings.stream()
+                .flatMap(l -> l.stream()
+                        .filter(cc -> cc.type().equals(type)).toList().stream())
+                .map(CubeCount::count)
+                .mapToInt(Integer::intValue)
+                .max()
+                .orElse(0);
+    }
 }

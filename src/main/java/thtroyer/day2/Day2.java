@@ -40,4 +40,11 @@ public class Day2 {
         return new Game(id, drawings);
     }
 
+    public int power(String[] gameStrings) {
+        return Arrays.stream(gameStrings)
+                .map(this::gameFromLine)
+                .map(Game::getPower)
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
 }

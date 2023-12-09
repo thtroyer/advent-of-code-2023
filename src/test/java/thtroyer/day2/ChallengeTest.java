@@ -115,4 +115,11 @@ public class ChallengeTest {
                 .isEqualTo(2406);
     }
 
+    @Test
+    public void part2() {
+        Day2 day2 = new Day2();
+        assertThat(day2.power(input.split("\n")))
+                .isEqualTo(78375);
+    }
+
 }
